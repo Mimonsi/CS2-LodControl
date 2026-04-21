@@ -11,7 +11,15 @@ font_path = "Poppins-Bold.ttf"
 
 # True  = each image contributes its own quarter of the full frame (composite)
 # False = center crop of each image repeated across all segments
-COMPOSITE_MODE = True
+COMPOSITE_MODE = False
+
+# True  = reverse order so "No LOD" is on the left (high detail on the right)
+# False = default order: 50% -> 100% -> 500% -> No LOD
+REVERSE_ORDER = False
+
+if REVERSE_ORDER:
+    paths = paths[::-1]
+    labels = labels[::-1]
 
 imgs = [Image.open(p) for p in paths]
 w, h = imgs[0].size  # 1920x1080
@@ -39,25 +47,32 @@ def add_label(img_crop, label, font_size=72, margin_bottom=120):
     return Image.alpha_composite(img, overlay).convert("RGB")
 
 
-def get_crop(img, index, seg_w, mode_composite):
-    if mode_composite:
-        x0 = index * seg_w
-        x1 = x0 + seg_w if index < 3 else w
-        return img.crop((x0, 0, x1, h))
+def get_crop(img, index, seg_w):
+    """Return a seg_w x h crop from the image. In composite mode each image
+    contributes its own spatial quarter; the center seg_w columns of that
+    quarter are taken so we never distort (crop, don't stretch)."""
+    if COMPOSITE_MODE:
+        # full quarter boundaries
+        q_x0 = index * (w // 4)
+        q_x1 = q_x0 + (w // 4) if index < 3 else w
+        q_w = q_x1 - q_x0
+        if seg_w >= q_w:
+            # banner mode: seg_w == q_w, take the whole quarter
+            return img.crop((q_x0, 0, q_x1, h))
+        else:
+            # square mode: seg_w < q_w, center-crop within the quarter
+            cx = q_x0 + q_w // 2
+            return img.crop((cx - seg_w // 2, 0, cx + seg_w // 2, h))
     else:
         cx = w // 2
         return img.crop((cx - seg_w // 2, 0, cx + seg_w // 2, h))
 
 
 # --- Banner ---
-seg_w_banner = h  # 1080px per segment → 4320×1080 total
-banner_w = seg_w_banner * 4 if not COMPOSITE_MODE else w
-if COMPOSITE_MODE:
-    seg_w_banner = w // 4  # 480px per segment → 1920×1080 total
-
+seg_w_banner = h if not COMPOSITE_MODE else w // 4  # 1080px or 480px per segment
 banner = Image.new("RGB", (seg_w_banner * 4, h))
 for i, img in enumerate(imgs):
-    crop = get_crop(img, i, seg_w_banner, COMPOSITE_MODE)
+    crop = get_crop(img, i, seg_w_banner)
     font_size = 52 if COMPOSITE_MODE else 72
     labeled = add_label(crop, labels[i], font_size=font_size, margin_bottom=120)
     banner.paste(labeled, (i * seg_w_banner, 0))
@@ -70,17 +85,10 @@ banner.save("lodcontrol_banner_labeled.jpg", quality=95)
 print(f"Banner saved: {banner.size}")
 
 # --- Square ---
-seg_sq = h // 4  # 270px per segment → 1080×1080 total
+seg_sq = h // 4  # 270px per segment -> 1080x1080 total
 square = Image.new("RGB", (h, h))
 for i, img in enumerate(imgs):
-    if COMPOSITE_MODE:
-        # map the square segment back to the corresponding horizontal slice of the full image
-        src_x0 = int(i * w / 4)
-        src_x1 = int((i + 1) * w / 4)
-        crop = img.crop((src_x0, 0, src_x1, h)).resize((seg_sq, h), Image.LANCZOS)
-    else:
-        cx = w // 2
-        crop = img.crop((cx - seg_sq // 2, 0, cx + seg_sq // 2, h))
+    crop = get_crop(img, i, seg_sq)
     labeled = add_label(crop, labels[i], font_size=28, margin_bottom=50)
     square.paste(labeled, (i * seg_sq, 0))
 
