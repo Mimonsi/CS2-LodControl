@@ -57,7 +57,7 @@ draw_b = ImageDraw.Draw(banner)
 draw_b.line([(seg_w, 0), (seg_w, h * 2)], fill=(255, 255, 255, 80), width=2)
 draw_b.line([(0, h), (seg_w * 2, h)], fill=(255, 255, 255, 80), width=2)
 
-banner.save("lodcontrol_banner_labeled.jpg", quality=95)
+banner.save("Banner.jpg", quality=90)
 print(f"Banner saved: {banner.size}")
 
 # --- Square (1x4) with title ---
@@ -101,6 +101,6 @@ title_draw.text(
 )
 
 square = Image.alpha_composite(square_rgba, title_overlay).convert("RGB")
-square.save("lodcontrol_square_labeled.jpg", quality=95)
+square.save("Thumbnail.jpg", quality=95)
 print(f"Square saved: {square.size}")
 print("Done")
