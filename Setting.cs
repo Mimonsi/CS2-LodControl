@@ -15,7 +15,7 @@ namespace LodControl
     {
         public const string kSection = "Main";
         public const string kGroup = "Group";
-        public const string kToggleDisableLodAction = "ToggleDisableLodModels";
+        public const string kToggleDisableLodAction = nameof(ToggleDisableLodModelsBinding);
         private readonly RenderingSystem _renderingSystem;
 
         public Setting(IMod mod) : base(mod)
@@ -43,7 +43,7 @@ namespace LodControl
             set => _renderingSystem.disableLodModels = value;
         }
 
-        [SettingsUIKeyboardBinding]
+        [SettingsUIKeyboardBinding(BindingKeyboard.None, kToggleDisableLodAction)]
         public ProxyBinding ToggleDisableLodModelsBinding { get; set; }
 
         private void ChangeLodDistance(float value)
