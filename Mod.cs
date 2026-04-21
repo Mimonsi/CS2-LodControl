@@ -1,8 +1,10 @@
 ﻿using Colossal.Logging;
 using Game;
+using Game.Input;
 using Game.Modding;
 using Game.SceneFlow;
 using Colossal.IO.AssetDatabase;
+using UnityEngine.InputSystem;
 
 namespace LodControl
 {
@@ -24,6 +26,19 @@ namespace LodControl
 
 
             AssetDatabase.global.LoadSettings(nameof(LodControl), m_Setting, new Setting(this));
+
+            m_Setting.RegisterKeyBindings();
+
+            var toggleAction = m_Setting.GetAction(Setting.kToggleDisableLodAction);
+            toggleAction.shouldBeEnabled = true;
+            toggleAction.onInteraction += OnToggleDisableLod;
+        }
+
+        private void OnToggleDisableLod(ProxyAction action, InputActionPhase phase)
+        {
+            if (phase != InputActionPhase.Performed) return;
+            m_Setting.DisableLodModels = !m_Setting.DisableLodModels;
+            log.Info($"DisableLodModels toggled to {m_Setting.DisableLodModels}");
         }
 
         public void OnDispose()
