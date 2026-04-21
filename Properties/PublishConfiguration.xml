@@ -19,9 +19,10 @@ Playing with disabled LODs is not really possible, but it's useful for creating 
 Images show 50%, 100%, 500% and LODs disabled
 	</LongDescription>
 	<!--Thumbnail-->
-	<Thumbnail Value="Properties/Thumbnail.png" />
+	<Thumbnail Value="Properties/Thumbnail.jpg" />
 	<!--Screenshot, can be set multiple times-->
-	<Screenshot Value="" />
+	<Screenshot Value="Properties/Thumbnail.jpg" />
+	<Screenshot Value="Properties/Banner.jpg" />
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
@@ -39,7 +40,10 @@ Images show 50%, 100%, 500% and LODs disabled
 Initial Release
 	</ChangeLog>
 	<!--External link, can be set multiple times. supported types are "discord", "github", "youtube", "twitch", "x", "paypal", "patreon", "buymeacoffee", "kofi", "crowdin", "gitlab", "gofundme"-->
-	<ExternalLink Type="" Url="" />
+	<ExternalLink Type="github" Url="https://github.com/Mimonsi/CS2-VehicleController" />
+	<ExternalLink Type="discord" Url="https://discord.gg/vd7HXnpPJf" />
+	<ExternalLink Type="paypal" Url="https://www.paypal.com/paypalme/KonstantinSchwarze" />
+	<ExternalLink Type="ko-fi" Url="https://ko-fi.com/mimonsi" />
 	<!--Supported values Public, Private, Unlisted-->
 	<AccessLevel Value="Unlisted" />
 </Publish>
