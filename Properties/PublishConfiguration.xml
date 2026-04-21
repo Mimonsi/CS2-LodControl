@@ -2,13 +2,21 @@
 	<!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
 	<ModId Value="" />
 	<!--Name of the mod to display to players-->
-	<DisplayName Value="LodControl" />
+	<DisplayName Value="LOD Control" />
 	<!--Short description of the mod-->
-	<ShortDescription Value="This is a short description" />
+	<ShortDescription Value="Change LOD distance higher than vanilla allows" />
 	<!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
 	<!--LongDescription Value="This is a long description" /-->
 	<LongDescription>
-This is a long description
+Level of detail makes a huge difference in graphics. The game allows you to choose values from 10% to 100%. This mod increases the maximum to 1000%. Also adds a toggle to disable LODs completely.
+Playing with disabled LODs is not really possible, but it's useful for creating screenshots.
+		
+## Features
+- Adjust LOD distance from 0% to 1000% of vanilla values
+- Setting to disable LODs completely
+- Hotkey to enable/disable LODs (usable from photo mode)
+		
+Images show 50%, 100%, 500% and LODs disabled
 	</LongDescription>
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/Thumbnail.png" />
@@ -21,7 +29,7 @@ This is a long description
 	<!--Version of the mod-->
 	<ModVersion Value="1.0" />
 	<!--Recommended version of the base game to use the mod-->
-	<GameVersion Value="1.0.*" />
+	<GameVersion Value="1.5.*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Required DLC, can be set multiple times. Supported values are "Landmark Buildings", "San Fransisco Set", "Beach Properties", "Urban Promenades", "Modern Architecture"-->

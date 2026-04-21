@@ -43,7 +43,7 @@ namespace LodControl
             set => _renderingSystem.disableLodModels = value;
         }
 
-        [SettingsUIKeyboardBinding(BindingKeyboard.L, kToggleDisableLodAction, ctrl: true)]
+        [SettingsUIKeyboardBinding]
         public ProxyBinding ToggleDisableLodModelsBinding { get; set; }
 
         private void ChangeLodDistance(float value)
