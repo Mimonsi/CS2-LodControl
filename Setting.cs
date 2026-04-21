@@ -2,12 +2,9 @@
 using Colossal.IO.AssetDatabase;
 using Game.Modding;
 using Game.Settings;
-using Game.UI;
-using Game.UI.Widgets;
 using System.Collections.Generic;
 using Game.Rendering;
 using Unity.Entities;
-using UnityEngine;
 
 namespace LodControl
 {
@@ -17,17 +14,18 @@ namespace LodControl
     {
         public const string kSection = "Main";
         public const string kGroup = "Group";
+        private readonly RenderingSystem _renderingSystem;
 
         public Setting(IMod mod) : base(mod)
         {
+            _renderingSystem = World.DefaultGameObjectInjectionWorld?.GetExistingSystemManaged<RenderingSystem>();
         }
 
 
 
-        private int _levelOfDetail;
-        [SettingsUISlider(min = 1f, max = 1000f, step = 1f, unit = "percentage", scalarMultiplier = 100f)]
-        [SettingsUISection(kSection, kGroup)]
-        public int LevelOfDetail
+        private float _levelOfDetail;
+        [SettingsUISlider(min = 0f, max = 1000f, step = 10f, unit = "percentage", scalarMultiplier = 100f)]
+        public float LevelOfDetail
         {
             get => _levelOfDetail;
             set
@@ -36,41 +34,24 @@ namespace LodControl
                 _levelOfDetail = value;
             }
         }
-
-        public override void SetDefaults()
+        
+        public bool DisableLodModels
         {
-            
+            get => _renderingSystem.disableLodModels;
+            set => _renderingSystem.disableLodModels = value;
         }
 
-        [SettingsUIButton]
-        public bool PrintLodSettingButton
+        private void ChangeLodDistance(float value)
         {
-            set => PrintLodSetting();
-        }
-
-        public static void PrintLodSetting()
-        {
-            //SharedSettings.instance.graphics.levelOfDetail;
-            RenderingSystem renderingSystem = World.DefaultGameObjectInjectionWorld?.GetExistingSystemManaged<RenderingSystem>();
-            if (renderingSystem != null)
-            {
-                var distance = renderingSystem.levelOfDetail;
-                Mod.log.Info("Level of Detail: " + distance);
-            }
-        }
-
-        public void ChangeLodDistance(int value)
-        {
-            //SharedSettings.instance.graphics.levelOfDetail;
-            /*RenderingSystem renderingSystem = World.DefaultGameObjectInjectionWorld?.GetExistingSystemManaged<RenderingSystem>();
-            if (renderingSystem != null)
-            {
-                renderingSystem.levelOfDetail = _lodDistance;
-            }*/
             var lod = SharedSettings.instance.graphics
                 .GetQualitySetting<LevelOfDetailQualitySettings>();
             lod.levelOfDetail = value;
             lod.Apply();
+        }
+        
+        public override void SetDefaults()
+        {
+            
         }
     }
 
@@ -97,6 +78,12 @@ namespace LodControl
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.LevelOfDetail)),
                     $"Change distance where Level of Detail applies. Base game has values from 0-100%, this allows more freedom."
+                },
+                
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.DisableLodModels)), "Disable LOD Models" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.DisableLodModels)),
+                    $"Completely disable LOD Models. This renders everything at maximum quality. Not suitable for gameplay, but useful for screenshots"
                 },
             };
         }
