@@ -24,7 +24,6 @@ def add_label(img_crop, label, font_size=72, margin_bottom=120):
 
     padding_x, padding_y = 28, 18
     bbox = draw.textbbox((0, 0), label, font=font)
-    # bbox may have a top offset (e.g. bbox[1] != 0) — account for it
     text_x_offset = bbox[0]
     text_y_offset = bbox[1]
     tw = bbox[2] - bbox[0]
@@ -38,7 +37,6 @@ def add_label(img_crop, label, font_size=72, margin_bottom=120):
     pill_y0 = pill_y1 - pill_h
 
     draw.rounded_rectangle([pill_x0, pill_y0, pill_x1, pill_y1], radius=18, fill=(10, 20, 30, 190))
-    # subtract the bbox offsets so text sits exactly centered in the pill
     draw.text(
         (pill_x0 + padding_x - text_x_offset, pill_y0 + padding_y - text_y_offset),
         label, font=font, fill=(255, 255, 255, 255)
@@ -62,7 +60,7 @@ draw_b.line([(0, h), (seg_w * 2, h)], fill=(255, 255, 255, 80), width=2)
 banner.save("lodcontrol_banner_labeled.jpg", quality=95)
 print(f"Banner saved: {banner.size}")
 
-# --- Square (1x4) ---
+# --- Square (1x4) with title ---
 seg_sq = h // 4
 square = Image.new("RGB", (h, h))
 for i, img in enumerate(imgs):
@@ -76,6 +74,33 @@ draw_s = ImageDraw.Draw(square)
 for i in range(1, 4):
     draw_s.line([(i * seg_sq, 0), (i * seg_sq, h)], fill=(255, 255, 255, 80), width=1)
 
+# title overlay: "LOD Control" centered at top
+square_rgba = square.convert("RGBA")
+title_overlay = Image.new("RGBA", square_rgba.size, (0, 0, 0, 0))
+title_draw = ImageDraw.Draw(title_overlay)
+title_font = ImageFont.truetype(font_path, 90)
+title = "LOD Control"
+tbbox = title_draw.textbbox((0, 0), title, font=title_font)
+tx_off = tbbox[0]
+ty_off = tbbox[1]
+tw = tbbox[2] - tbbox[0]
+th = tbbox[3] - tbbox[1]
+
+pad_x, pad_y = 36, 20
+pill_w = tw + pad_x * 2
+pill_h = th + pad_y * 2
+pill_x0 = (h - pill_w) // 2
+pill_x1 = pill_x0 + pill_w
+pill_y0 = 48
+pill_y1 = pill_y0 + pill_h
+
+title_draw.rounded_rectangle([pill_x0, pill_y0, pill_x1, pill_y1], radius=20, fill=(10, 20, 30, 200))
+title_draw.text(
+    (pill_x0 + pad_x - tx_off, pill_y0 + pad_y - ty_off),
+    title, font=title_font, fill=(255, 255, 255, 255)
+)
+
+square = Image.alpha_composite(square_rgba, title_overlay).convert("RGB")
 square.save("lodcontrol_square_labeled.jpg", quality=95)
 print(f"Square saved: {square.size}")
 print("Done")
