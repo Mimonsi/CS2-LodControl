@@ -40,7 +40,7 @@ Images show 50%, 100%, 500% and LODs disabled
 Initial Release
 	</ChangeLog>
 	<!--External link, can be set multiple times. supported types are "discord", "github", "youtube", "twitch", "x", "paypal", "patreon", "buymeacoffee", "kofi", "crowdin", "gitlab", "gofundme"-->
-	<ExternalLink Type="github" Url="https://github.com/Mimonsi/CS2-VehicleController" />
+	<ExternalLink Type="github" Url="https://github.com/Mimonsi/CS2-LodControl" />
 	<ExternalLink Type="discord" Url="https://discord.gg/vd7HXnpPJf" />
 	<ExternalLink Type="paypal" Url="https://www.paypal.com/paypalme/KonstantinSchwarze" />
 	<ExternalLink Type="kofi" Url="https://ko-fi.com/mimonsi" />

@@ -1,4 +1,4 @@
-﻿using Colossal.Logging;
+using Colossal.Logging;
 using Game;
 using Game.Input;
 using Game.Modding;
@@ -23,7 +23,6 @@ namespace LodControl
             m_Setting = new Setting(this);
             m_Setting.RegisterInOptionsUI();
             GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
-
 
             AssetDatabase.global.LoadSettings(nameof(LodControl), m_Setting, new Setting(this));
 

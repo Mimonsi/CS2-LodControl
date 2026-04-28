@@ -1,4 +1,4 @@
-﻿using Colossal;
+using Colossal;
 using Colossal.IO.AssetDatabase;
 using Game.Input;
 using Game.Modding;
@@ -23,9 +23,8 @@ namespace LodControl
             _renderingSystem = World.DefaultGameObjectInjectionWorld?.GetExistingSystemManaged<RenderingSystem>();
         }
 
-
-
         private float _levelOfDetail;
+
         [SettingsUISlider(min = 0f, max = 1000f, step = 10f, unit = "percentage", scalarMultiplier = 100f)]
         public float LevelOfDetail
         {
@@ -36,7 +35,7 @@ namespace LodControl
                 _levelOfDetail = value;
             }
         }
-        
+
         public bool DisableLodModels
         {
             get => _renderingSystem.disableLodModels;
@@ -53,10 +52,9 @@ namespace LodControl
             lod.levelOfDetail = value;
             lod.Apply();
         }
-        
+
         public override void SetDefaults()
         {
-            
         }
     }
 
@@ -76,27 +74,22 @@ namespace LodControl
             {
                 { m_Setting.GetSettingsLocaleID(), "level of Detail Control" },
                 { m_Setting.GetOptionTabLocaleID(Setting.kSection), "Main" },
-                
                 { m_Setting.GetOptionGroupLocaleID(Setting.kGroup), "Group" },
-                
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.LevelOfDetail)), "Level of Detail" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.LevelOfDetail)),
-                    $"Change distance where Level of Detail applies. Base game has values from 0-100%, this allows more freedom."
+                    "Change distance where Level of Detail applies. Base game has values from 0-100%, this allows more freedom."
                 },
-                
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.DisableLodModels)), "Disable LOD Models" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.DisableLodModels)),
-                    $"Completely disable LOD Models. This renders everything at maximum quality. Not suitable for gameplay, but useful for screenshots"
+                    "Completely disable LOD Models. This renders everything at maximum quality. Not suitable for gameplay, but useful for screenshots"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ToggleDisableLodModelsBinding)), "Toggle Disable LOD Models" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ToggleDisableLodModelsBinding)),
                     "Hotkey to toggle the 'Disable LOD Models' setting on or off."
                 },
-
                 { m_Setting.GetBindingMapLocaleID(), "LOD Control" },
                 { m_Setting.GetBindingKeyLocaleID(Setting.kToggleDisableLodAction), "Toggle Disable LOD Models" },
             };
