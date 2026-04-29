@@ -55,12 +55,7 @@ namespace LodControl
         [SettingsUIButtonGroup(kVanillaPresetButtonGroup)]
         public bool VeryLowPreset
         {
-            get => false;
-            set
-            {
-                if (value)
-                    ApplyLodValue(0.25f);
-            }
+            set => ApplyLodValue(0.25f);
         }
 
         [SettingsUISection(kSection, kGroup)]
@@ -68,12 +63,7 @@ namespace LodControl
         [SettingsUIButtonGroup(kVanillaPresetButtonGroup)]
         public bool LowPreset
         {
-            get => false;
-            set
-            {
-                if (value)
-                    ApplyLodValue(0.35f);
-            }
+            set => ApplyLodValue(0.35f);
         }
 
         [SettingsUISection(kSection, kGroup)]
@@ -81,12 +71,7 @@ namespace LodControl
         [SettingsUIButtonGroup(kVanillaPresetButtonGroup)]
         public bool MediumPreset
         {
-            get => false;
-            set
-            {
-                if (value)
-                    ApplyLodValue(0.5f);
-            }
+            set => ApplyLodValue(0.5f);
         }
 
         [SettingsUISection(kSection, kGroup)]
@@ -94,12 +79,7 @@ namespace LodControl
         [SettingsUIButtonGroup(kVanillaPresetButtonGroup)]
         public bool HighPreset
         {
-            get => false;
-            set
-            {
-                if (value)
-                    ApplyLodValue(0.7f);
-            }
+            set => ApplyLodValue(0.7f);
         }
 
         [SettingsUISection(kSection, kGroup)]
@@ -202,9 +182,25 @@ namespace LodControl
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.VeryLowPreset)), "Very Low" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.VeryLowPreset)),
+                    "The vanilla setting when graphics are set to 'Very Low'."
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.LowPreset)), "Low" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.LowPreset)),
+                    "The vanilla setting when graphics are set to 'Low'."
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.MediumPreset)), "Medium" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.MediumPreset)),
+                    "The vanilla setting when graphics are set to 'Medium'."
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.HighPreset)), "High" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.HighPreset)),
+                    "The vanilla setting when graphics are set to 'High'."
+                },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.DisableLodModels)), "Disable LOD Models" },
                 {

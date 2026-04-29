@@ -26,18 +26,19 @@ Images show 50%, 100%, 500% and LODs disabled
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
-	<ForumLink Value="" />
+	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/lod-control-mod.1919268" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.0" />
+	<ModVersion Value="1.1.0" />
 	<!--Recommended version of the base game to use the mod-->
-	<GameVersion Value="1.5.*" />
+	<GameVersion Value="1.5.7*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Required DLC, can be set multiple times. Supported values are "Landmark Buildings", "San Fransisco Set", "Beach Properties", "Urban Promenades", "Modern Architecture"-->
 	<RequiredDLC Value="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<ChangeLog>
-Initial Release
+- Add buttons for vanilla presets (Very Low - High)
+- Add 3 presets with hotkeys
 	</ChangeLog>
 	<!--External link, can be set multiple times. supported types are "discord", "github", "youtube", "twitch", "x", "paypal", "patreon", "buymeacoffee", "kofi", "crowdin", "gitlab", "gofundme"-->
 	<ExternalLink Type="github" Url="https://github.com/Mimonsi/CS2-LodControl" />
@@ -45,5 +46,5 @@ Initial Release
 	<ExternalLink Type="paypal" Url="https://www.paypal.com/paypalme/KonstantinSchwarze" />
 	<ExternalLink Type="kofi" Url="https://ko-fi.com/mimonsi" />
 	<!--Supported values Public, Private, Unlisted-->
-	<AccessLevel Value="Unlisted" />
+	<AccessLevel Value="Public" />
 </Publish>
