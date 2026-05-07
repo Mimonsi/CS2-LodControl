@@ -167,7 +167,7 @@ namespace LodControl
         {
             return new Dictionary<string, string>
             {
-                { m_Setting.GetSettingsLocaleID(), "level of Detail Control" },
+                { m_Setting.GetSettingsLocaleID(), "LOD Control" },
                 { m_Setting.GetOptionTabLocaleID(Setting.kSection), "Main" },
                 { m_Setting.GetOptionTabLocaleID(Setting.kPresetsSection), "Presets" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kGroup), "Main" },

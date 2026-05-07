@@ -28,7 +28,7 @@ Images show 50%, 100%, 500% and LODs disabled
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/lod-control-mod.1919268" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.1.0" />
+	<ModVersion Value="1.1.1" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.5.7*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -37,8 +37,7 @@ Images show 50%, 100%, 500% and LODs disabled
 	<RequiredDLC Value="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<ChangeLog>
-- Add buttons for vanilla presets (Very Low - High)
-- Add 3 presets with hotkeys
+- Renamed settings page to "LOD Control" and fixed it being at the end of the list
 	</ChangeLog>
 	<!--External link, can be set multiple times. supported types are "discord", "github", "youtube", "twitch", "x", "paypal", "patreon", "buymeacoffee", "kofi", "crowdin", "gitlab", "gofundme"-->
 	<ExternalLink Type="github" Url="https://github.com/Mimonsi/CS2-LodControl" />
